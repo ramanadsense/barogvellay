@@ -1,0 +1,2763 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
+  <title>Harisons Homes | Premium Real Estate in Barog Valley & Himachal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ["Rubik", "sans-serif"],
+            sans: ['Montserrat', 'Arial', 'sans-serif']
+          },
+          colors: {
+            ink: '#15100b',
+            copper: '#c98764',
+            cream: '#f7f4ef',
+            muted: '#8d8178',
+            theme1: '#ffe32f',
+            theme2: '#5417d4',
+          },
+          letterSpacing: {
+            ultra: '.32em',
+            mega: '.45em'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;500;600&family=Hedvig+Letters+Sans&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Montserrat:wght@300;400;500;600&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    #harisonsMap {
+      min-height: 500px;
+    }
+
+    @media (min-width: 1024px) {
+      #harisonsMap {
+        min-height: 620px;
+      }
+    }
+
+    .leaflet-control-attribution {
+      font-size: 8px;
+    }
+
+    .harisons-marker {
+      width: 14px;
+      height: 14px;
+      border-radius: 9999px;
+      background: #c98963;
+      border: 3px solid white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+    }
+
+    .harisons-project-marker {
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background: #292521;
+      border: 4px solid #c98963;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .4);
+    }
+
+    .loc-btn.active {
+      background: #5417d4;
+    }
+
+    .loc-btn.active .loc-number {
+      color: #c98963;
+    }
+
+    .loc-btn.active .loc-title {
+      color: white;
+    }
+
+    .loc-btn.active span {
+      color: white;
+    }
+
+    .loc-btn.active .loc-arrow {
+      color: #c98963;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-ink antialiased selection:bg-copper selection:text-white">
+  <!-- ========  TOP BAR ======== -->
+  <div id="topBar"
+    class="hidden md:flex h-10 items-center justify-between bg-[#0d0a07] px-6 lg:px-8 text-sm font-serif tracking-wide text-yellow-300">
+    <p>
+      Harisons Group Residences
+    </p>
+    <div class="flex items-center gap-2 text-sm">
+      <span>◆</span>
+      <span class="text-yellow-300">
+        Barog, Himachal Pradesh
+      </span>
+    </div>
+  </div>
+
+  <!-- ========  HEADER ========= -->
+  <header id="siteHeader"
+    class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-black/5 transition-transform duration-500 ease-in-out">
+    <div class="mx-auto flex h-20 md:h-24 max-w-[1500px] items-center justify-between px-5 md:px-8 lg:px-12">
+      <!-- LOGO -->
+      <a href="#home" class="flex items-center shrink-0" aria-label="Harisons Builder home">
+        <img src="assets/images/logo/logo.png" class="w-[70px] md:w-[80px]" alt="Harisons Builder">
+      </a>
+
+      <!-- =========  DESKTOP NAVIGATION ========= -->
+      <nav class="hidden xl:flex items-center gap-7 2xl:gap-9 text-[11px] font-medium tracking-[0.18em] uppercase">
+        <a href="#home"
+          class="relative py-3 text-[#171311] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-px after:bg-[#7040df]">
+          Home
+        </a>
+        <a href="#project" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          The Project
+        </a>
+        <a href="#living" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          Living
+        </a>
+        <a href="#location" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          Location
+        </a>
+        <a href="#gallery" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          Gallery
+        </a>
+        <a href="#about" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          About Us
+        </a>
+        <a href="#contact" class="py-3 text-[#171311]/70 hover:text-[#7040df] transition">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- ====== RIGHT SIDE ====== -->
+      <div class="flex items-center gap-4">
+        <!-- Book Site Visit -->
+        <a href="#contact"
+          class="inline items-center gap-4 text-[10px] font-semibold uppercase text-theme1 bg-theme2 p-4 py-3 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:outline hover:outline-2 outline outline-2">
+          Book a Site Visit
+        </a>
+
+        <!-- SINGLE MENU BUTTON -->
+        <button id="openDrawer" class="group flex h-12 w-12 items-center justify-center" aria-label="Open menu"
+          aria-expanded="false">
+          <span class="relative block h-5 w-8">
+            <span class="absolute left-0 top-1 h-px w-8 bg-[#171311] transition-colors group-hover:bg-[#7040df]"></span>
+            <span
+              class="absolute left-0 bottom-1 h-px w-8 bg-[#171311] transition-colors group-hover:bg-[#7040df]"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- ========  FLOATING MENU ========= -->
+
+  <!-- ========  DRAWER OVERLAY ======== -->
+  <div id="drawerOverlay" class="fixed inset-0 z-[60] invisible opacity-0 transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div id="drawerBackdrop" class="absolute inset-0 bg-black/45"></div>
+    <!-- ========  DRAWER =========== -->
+    <aside id="drawer"
+      class="absolute right-0 top-0 h-full w-full max-w-[520px] translate-x-full bg-[#18110c] text-white shadow-2xl transition-transform duration-500 ease-out">
+      <!-- CLOSE BUTTON -->
+      <button id="closeDrawer" class="absolute right-7 top-7 h-12 w-12 z-10" aria-label="Close menu">
+        <span class="absolute left-2 top-6 h-px w-8 rotate-45 bg-white"></span>
+        <span class="absolute left-2 top-6 h-px w-8 -rotate-45 bg-white"></span>
+      </button>
+
+      <!-- DRAWER CONTENT -->
+      <div class="flex h-full flex-col items-center justify-center px-10 text-center">
+        <!-- Logo Mark -->
+        <a href="#home" class="flex items-center shrink-0" aria-label="Harisons Builder home">
+          <img src="assets/images/logo/bargovalley.png" class="w-[70px] md:w-[120px]" alt="Harisons Builder">
+        </a>
+        <!-- Brand -->
+        <h2 class="font-serif text-4xl tracking-[.12em]">
+          Harisons
+        </h2>
+        <p class="mt-3 text-[9px] uppercase tracking-[.3em] text-[#a98af5]">
+          Builder
+        </p>
+
+        <!-- Divider -->
+        <div class="my-8 h-px w-20 bg-[#a98af5]/60"></div>
+        <!-- Navigation -->
+        <nav class="flex flex-col gap-4">
+          <a href="#home" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            Home
+          </a>
+          <a href="#project" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            The Project
+          </a>
+          <a href="#living" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            Living
+          </a>
+          <a href="#location" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            Location
+          </a>
+          <a href="#gallery" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            Gallery
+          </a>
+          <a href="#about" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            About Us
+          </a>
+          <a href="#contact" class="text-[11px] uppercase tracking-[.25em] hover:text-[#a98af5] transition">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- CTA -->
+        <a href="#contact"
+          class="mt-8 inline-flex items-center gap-3 bg-[#7040df] px-7 py-3.5 text-[9px] uppercase tracking-[.18em] hover:bg-[#5f32c8] transition">
+          Book a Site Visit
+          <span>→</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ======== SCRIPT =========== -->
+  <script>
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawer = document.getElementById('drawer');
+    const openDrawerBtn = document.getElementById('openDrawer');
+    const closeDrawerBtn = document.getElementById('closeDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    /* ======= OPEN DRAWER ========== */
+    function openDrawer() {
+      drawerOverlay.classList.remove(
+        'invisible',
+        'opacity-0'
+      );
+      drawerOverlay.classList.add(
+        'opacity-100'
+      );
+      drawer.classList.remove(
+        'translate-x-full'
+      );
+      document.body.style.overflow = 'hidden';
+      openDrawerBtn.setAttribute(
+        'aria-expanded',
+        'true'
+      );
+    }
+
+    /* ======= CLOSE DRAWER ========= */
+    function closeDrawer() {
+      drawer.classList.add(
+        'translate-x-full'
+      );
+      drawerOverlay.classList.remove(
+        'opacity-100'
+      );
+      drawerOverlay.classList.add(
+        'opacity-0'
+      );
+      document.body.style.overflow = '';
+      openDrawerBtn.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+      setTimeout(function () {
+        drawerOverlay.classList.add(
+          'invisible'
+        );
+      }, 500);
+    }
+
+    /* ====== OPEN ======== */
+    openDrawerBtn.addEventListener(
+      'click',
+      openDrawer
+    );
+
+    /* ====  CLOSE BUTTON ======== */
+    closeDrawerBtn.addEventListener(
+      'click',
+      closeDrawer
+    );
+
+    /* ======= BACKDROP CLICK ======== */
+    drawerBackdrop.addEventListener(
+      'click',
+      closeDrawer
+    );
+
+    /* ==== ESCAPE KEY ======= */
+    document.addEventListener(
+      'keydown',
+      function (event) {
+        if (event.key === 'Escape') {
+          closeDrawer();
+        }
+      }
+    );
+
+    /* ======  NAVIGATION LINKS ====== */
+    drawer.querySelectorAll('a').forEach(
+      function (link) {
+
+        link.addEventListener(
+          'click',
+          closeDrawer
+        );
+
+      }
+    );
+  </script>
+
+  <!-- ============ VIDEO HERO SECTION ========== -->
+  <section id="home" class="relative min-h-[calc(100vh-40px)] md:min-h-[calc(100vh-40px)] overflow-hidden bg-[#171311]">
+    <!-- Background Video -->
+    <video class="absolute inset-0 h-full w-full
+               object-cover" autoplay muted loop playsinline poster="assets/images/about/banner3.jpg">
+      <source src="assets/video/barogvalley4.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-theme2/20"></div>
+
+    <!-- Slight Bottom Gradient -->
+    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/65 via-black/20 to-transparent"></div>
+    <!-- ===========  HERO CONTENT =========== -->
+    <div class="relative z-10 flex min-h-[calc(100vh-40px)] items-center justify-center px-5 md:px-8">
+      <div class="text-center text-white">
+      </div>
+    </div>
+    </div>
+    <div class="absolute bottom-7 left-0 right-0 z-10 px-5 md:px-8 lg:px-12">
+      <div class="mx-auto flex max-w-[1500px] items-end justify-between">
+        <!-- Location -->
+        <div class="hidden sm:block">
+          <p class="text-[8px] uppercase tracking-[0.25em] text-white/40">
+            Location
+          </p>
+          <p class="mt-1 text-[10px] tracking-wide text-white/70">
+            Barog, Himachal Pradesh
+          </p>
+        </div>
+        <!-- Scroll -->
+        <a href="#project" class="group mx-auto flex flex-col items-center gap-3 sm:mx-0">
+          <span class="text-[8px] uppercase tracking-[0.3em] text-white/50">
+            Scroll to explore
+          </span>
+          <span class="flex h-10 w-6 items-start justify-center rounded-full border border-white/30 pt-2">
+            <span class="h-2 w-px bg-white/70 transition-transform duration-500 group-hover:translate-y-2"></span>
+          </span>
+        </a>
+        <!-- RERA -->
+        <div class="hidden sm:block text-right">
+          <p class="text-[8px] uppercase tracking-[0.25em] text-white/40">
+            RERA Registered
+          </p>
+          <p class="mt-1 text-[10px] tracking-wide text-white/70">
+            HPRERASOL2024119/P
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== QUICK FACTS / PROJECT STATS ====== -->
+  <section id="project-stats" class="relative w-full overflow-hidden bg-theme2">
+    <div class="mx-auto grid max-w-[1400px] grid-cols-2 lg:grid-cols-4">
+
+      <!-- === STAT 01 ===== -->
+      <div
+        class="group relative flex min-h-[115px] flex-col items-center justify-center px-5 py-7 text-center transition duration-300 hover:bg-theme1 sm:min-h-[135px] sm:py-8">
+        <!-- Vertical separator -->
+        <span class="absolute right-0 top-1/2 hidden h-12 -translate-y-1/2 bg-white/15 sm:block"
+          style="width: 1px;"></span>
+
+        <span class="mb-2 text-[9px] font-medium uppercase tracking-[0.3em] text-white/55 group-hover:text-theme2">
+          Residences
+        </span>
+
+        <div
+          class="font-serif text-[28px] font-light leading-none tracking-wide text-white sm:text-[34px] group-hover:text-theme2">
+          1 BHK
+        </div>
+
+        <span
+          class="mt-2 text-[7px] font-medium uppercase tracking-[0.25em] text-white/55 sm:text-[8px] group-hover:text-theme2">
+          Thoughtfully Planned Homes
+        </span>
+      </div>
+
+
+      <!-- ===== STAT 02 ===== -->
+      <div
+        class="group relative flex min-h-[115px] flex-col items-center justify-center px-5 py-7 text-center transition duration-300 hover:bg-theme1 sm:min-h-[135px] sm:py-8">
+        <!-- Desktop separator -->
+        <span class="absolute right-0 top-1/2 hidden h-12 -translate-y-1/2 bg-white/15 lg:block"
+          style="width: 1px;"></span>
+
+        <!-- Mobile/Tablet top separator -->
+        <span class="absolute left-0 right-0 top-0 bg-white/10 lg:hidden" style="height: 1px;"></span>
+
+        <span class="mb-2 text-[9px] font-medium uppercase tracking-[0.3em] text-white/55 group-hover:text-theme2">
+          Residence Sizes
+        </span>
+
+        <div
+          class="font-serif text-[28px] font-light leading-none tracking-wide text-white sm:text-[34px] group-hover:text-theme2">
+          752–998
+        </div>
+
+        <span
+          class="mt-2 text-[7px] font-medium uppercase tracking-[0.25em] text-white/55 sm:text-[8px] group-hover:text-theme2">
+          Sq. Ft.
+        </span>
+      </div>
+
+
+      <!-- ===== STAT 03 ===== -->
+      <div
+        class="group relative flex min-h-[115px] flex-col items-center justify-center px-5 py-7 text-center transition duration-300 hover:bg-theme1 sm:min-h-[135px] sm:py-8">
+        <!-- Desktop separator -->
+        <span class="absolute right-0 top-1/2 hidden h-12 -translate-y-1/2 bg-white/15 lg:block"
+          style="width: 1px;"></span>
+
+        <!-- Mobile/Tablet top separator -->
+        <span class="absolute left-0 right-0 top-0 bg-white/10 lg:hidden" style="height: 1px;"></span>
+
+        <span class="mb-2 text-[9px] font-medium uppercase tracking-[0.3em] text-white/55 group-hover:text-theme2">
+          Elevation
+        </span>
+
+        <div
+          class="font-serif text-[28px] font-light leading-none tracking-wide text-white sm:text-[34px] group-hover:text-theme2">
+          1,560
+        </div>
+
+        <span
+          class="mt-2 text-[7px] font-medium uppercase tracking-[0.25em] text-white/55 sm:text-[8px] group-hover:text-theme2">
+          Metres Above Sea Level
+        </span>
+      </div>
+
+
+      <!-- ===== STAT 04 ====== -->
+      <div
+        class="group relative flex min-h-[115px] flex-col items-center justify-center px-5 py-7 text-center transition duration-300 hover:bg-theme1 sm:min-h-[135px] sm:py-8">
+        <!-- Mobile/Tablet top separator -->
+        <span class="absolute left-0 right-0 top-0 bg-white/10 lg:hidden" style="height: 1px;"></span>
+
+        <span class="mb-2 text-[9px] font-medium uppercase tracking-[0.3em] text-white/55 group-hover:text-theme2">
+          Configurations
+        </span>
+
+        <div
+          class="font-serif text-[28px] font-light leading-none tracking-wide text-white sm:text-[34px] group-hover:text-theme2">
+          03
+        </div>
+
+        <span
+          class="mt-2 text-[7px] font-medium uppercase tracking-[0.25em] text-white/55 sm:text-[8px] group-hover:text-theme2">
+          Residence Configurations
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Exclusive residence -->
+  <section id="residence" class="mx-auto max-w-[1400px] py-20 pt-15 md:pt-20 ">
+    <div class="text-center">
+      <p class="my-3 text-xs uppercase font-semibold text-copper">The Harisons Experience</p>
+      <h2 class="font-serif text-4xl md:text-5xl font-light">A Better Way To Live In The Hills.</h2>
+      <p class="mt-3">Presenting our exclusive 1 BHK collection in the first
+        phase. Designed for comfort, view, and value.</p>
+    </div>
+    <div class="mt-14 grid items-start gap-10 lg:grid-cols-12 px-5">
+      <div class="relative lg:col-span-7 lg:pr-14">
+        <img class="h-[420px] w-full object-cover md:h-[520px]" src="assets/images/about/about4.jpeg"
+          alt="Luxury residence courtyard">
+        <div
+          class="img2 mt-5 h-[270px] w-full object-cover shadow-xl md:absolute md:-bottom-16 md:right-0 md:mt-0 md:w-[53%]">
+          <img class="" src="assets/images/about/about5.png" alt="Modern villa">
+
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <h3 class="font-serif text-3xl leading-tight tracking-[.08em] md:text-4xl uppercase font-light">Premium 1 BHK
+          Apartments
+        </h3>
+        <p class="mt-5 text-sm uppercase leading-5 tracking-[.22em] text-yellow-700">What if everyday life felt a little
+          like a holiday?</p>
+        <p class="mt-4 text-sm leading-7 text-muted">Imagine waking up to mountain views, fresh air and a quieter
+          environment — while still having the comfort and conveniences of a thoughtfully planned residential community.
+        </p>
+        <p class="mt-2 text-sm leading-7 text-muted">Harisons Group Residences is envisioned as a gated mountain township
+          where well-designed homes, natural surroundings, lifestyle amenities and modern conveniences come together.
+        </p>
+        <div class="mt-10 space-y-4 text-[10px] tracking-[.07em]">
+          <div class="mt-10 space-y-4 text-[10px] uppercase tracking-[.14em]">
+            <div class="flex justify-between border-b border-black/10 pb-3"><span>A place to spend more time
+                outdoors.</span></div>
+            <div class="flex justify-between border-b border-black/10 pb-3"><span>A place to stay active.</span></div>
+            <div class="flex justify-between border-b border-black/10 pb-3"><span>A place to unwind.</span></div>
+            <div class="flex justify-between border-b border-black/10 pb-3"><span>A place to enjoy the mountains without
+                giving up everyday comfort.</span></div>
+          </div>
+
+          <!-- CTA -->
+          <a href="#project"
+            class="mt-8 inline-flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme2 bg-theme1 p-4 transition duration-300 hover:text-theme1 hover:bg-theme2 hover:shadow-md">
+            Discover The Project →
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <div class="bg-theme2 border border-gold/20 p-8 py-4 mt-20 rv mx-5">
+      <p class="text-sm leading-5 text-white text-center">
+        <span class="text-theme1 font-semibold">Low AQI ~40* : </span> Enjoy the open surroundings and cleaner mountain
+        environment of Barog.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======= QUALITY & ENGINEERING ======== -->
+  <section id="gallery" class="bg-theme1 py-10 lg:py-20">
+    <div class="mx-auto max-w-[1400px] px-5">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1fr] gap-8 lg:gap-12">
+        <div class="aspect-[10/13] overflow-hidden">
+          <img src="assets/images/about/about7.png" alt="QUALITY" class="w-full">
+        </div>
+        <!-- ========  RIGHT : LIFESTYLE =========== -->
+        <div class="bg-theme2 border border-[#e5e2df] p-6 md:p-8 lg:p-10">
+          <!-- Heading -->
+          <div class="mb-10">
+            <span class="block text-xs tracking-[0.15em] uppercase text-white/80 font-serif mb-3">
+              QUALITY & ENGINEERING
+            </span>
+            <h3 class="text-3xl font-serif text-white/85 font-light">
+              Designed For
+              <span class="italic text-theme1/90">The Mountains.</span>
+            </h3>
+            <div class="mt-4 flex items-center justify-between gap-5">
+              <p class="text-sm text-white/60">
+                Your day. Your pace.
+              </p>
+              <span class="hidden sm:block h-px bg-white/80 flex-1"></span>
+            </div>
+          </div>
+
+          <!-- Lifestyle Timeline -->
+          <div class="relative">
+            <!-- Vertical Line -->
+            <div class="absolute left-[18px] top-4 bottom-4 w-px bg-[#dedbd7]"></div>
+            <!-- 01 Slow Mornings -->
+            <div class="relative flex gap-7 pb-9 group">
+              <div
+                class="relative z-10 w-[37px] h-[37px] shrink-0 text-theme2 bg-theme1 group-hover:bg-white group-hover:border-theme2 group-hover:border group-hover:text-theme2 flex items-center justify-center text-xs">
+                01
+              </div>
+              <div class="pt-1">
+                <h4 class="font-serif italic text-2xl text-theme1/80">
+                  Structural Considerations
+                </h4>
+                <p class="text-sm text-white/60 mt-1">
+                  Seismic-grade foundations and reinforced concrete framework.
+                </p>
+              </div>
+            </div>
+            <!-- 02 Active Days -->
+            <div class="relative flex gap-7 pb-9 group">
+              <div
+                class="relative z-10 w-[37px] h-[37px] shrink-0 bg-white group-hover:bg-theme1 group-hover:text-theme2/80 border border-[#7040df] text-[#7040df] flex items-center justify-center text-xs hover:scale(1.1)">
+                02
+              </div>
+              <div class="pt-1">
+                <h4 class="font-serif italic text-2xl text-theme1/80">
+                  Thermal Comfort
+                </h4>
+                <p class="text-sm text-white/60 mt-1">
+                  AAC blocks and thermal insulation considerations.
+                </p>
+              </div>
+            </div>
+            <!-- 03 Easy Afternoons -->
+            <div class="relative flex gap-7 pb-9 group">
+              <div
+                class="relative z-10 w-[37px] h-[37px] shrink-0 bg-white group-hover:bg-theme1 group-hover:text-theme2/80 border border-[#7040df] text-[#7040df] flex items-center justify-center text-xs">
+                03
+              </div>
+              <div class="pt-1">
+                <h4 class="font-serif italic text-2xl text-theme1/80">
+                  Weather Protection
+                </h4>
+                <p class="text-sm text-white/60 mt-1">
+                  Multi-layer waterproofing, heat-reflective coatings and weather-grade external treatments.
+                </p>
+              </div>
+            </div>
+            <!-- 04 Golden Evenings -->
+            <div class="relative flex gap-7 pb-2 group">
+              <div
+                class="relative z-10 w-[37px] h-[37px] shrink-0 bg-white group-hover:bg-theme1 group-hover:text-theme2/80 border border-[#7040df] text-[#7040df] flex items-center justify-center text-xs">
+                04
+              </div>
+              <div class="pt-1">
+                <h4 class="font-serif italic text-2xl text-theme1/80">
+                  Interior Quality
+                </h4>
+                <p class="text-sm text-white/60 mt-1">
+                  Engineered flooring, engineered quartz kitchen surfaces, soft-close cabinetry and premium bathroom
+                  fittings.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Statement -->
+          <div class="mt-5 pt-8 border-t border-[#dedbd7]">
+            <p class="text-sm leading-tight font-light text-white/85">
+              The project combines considered engineering with selected materials and finishes, with attention to the
+              environmental conditions of the region.
+            </p>
+            <!-- CTA -->
+            <a href="#" target="_blank" rel="noopener noreferrer"
+              class="mt-8 group inline-flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme2 bg-theme1 p-4 py-3 transition duration-300 hover:text-theme1 hover:bg-theme2 hover:shadow-sm hover:outline-theme1/40 hover:outline hover:outline-2 ">
+              Experience the more <span class="text-[16px] transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY Harisons ======= -->
+  <section id="why-invest" class="bg-white py-10 lg:py-20">
+    <div class="mx-auto max-w-[1400px]">
+      <!-- SECTION HEADER -->
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 px-5 items-center">
+        <!-- ======== LEFT CONTENT ======= -->
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="my-3 text-xs uppercase font-semibold text-copper">Why Harisons</span>
+          </div>
+          <h2 class="font-serif text-4xl md:text-5xl font-light">
+            Experience the
+            <span class="block italic text-theme2"> Harisons Advantage </span>
+          </h2>
+          <div class="my-7 h-px w-14 bg-[#c98963]"></div>
+          <p class="max-w-[450px] font-serif text-[20px] font-light italic leading-[1.5] text-[#625b54]">
+            More than a home. A thoughtfully designed way of living.
+          </p>
+          <p class="mt-6 max-w-[450px] text-sm leading-7 text-[#777068] sm:text-[13px]">
+            We don't just build homes; we create lifestyles. Discover what makes Harisons Homes the preferred choice.
+          </p>
+          <!-- SMALL DETAIL -->
+          <div class="mt-10 flex items-center gap-5 border-t-[3px] border-theme1/80 bg-theme2/80 p-6">
+            <div>
+              <span class="mt-2 block uppercase tracking-[0.15em] text-theme1 font-serif text-xl">
+                Core Advantages
+              </span>
+            </div>
+            <div class="h-20 w-px bg-theme2/80"></div>
+            <p class="max-w-[230px] text-sm leading-5 text-white">
+              Designed around location, security, connectivity and quality.
+            </p>
+          </div>
+        </div>
+
+        <!-- ======= RIGHT — FEATURE CARDS ======== -->
+        <div class="grid grid-cols-1 gap-px bg-[#ddd7d0] sm:grid-cols-2 lg:col-span-7">
+          <!-- CARD 01 -->
+          <div class="group relative bg-white/80 p-7 transition duration-500 hover:bg-theme2 sm:p-8">
+            <div
+              class="absolute left-0 top-0 h-[4px] w-10 bg-theme2 group-hover:bg-theme1 transition-all duration-500 group-hover:w-full">
+            </div>
+            <div class="mb-4 flex items-center justify-between">
+              <span
+                class="font-serif text-[30px] font-light text-theme2/70 transition group-hover:text-theme1/70">01</span>
+              <span class="text-[15px] text-theme2/60 group-hover:text-theme1">◆</span>
+            </div>
+            <h3
+              class="font-serif text-[27px] font-light leading-[1.1] text-[#292521] transition group-hover:text-white">
+              Prime Location
+            </h3>
+            <p class="mt-4 text-sm leading-6 text-[#777068] transition group-hover:text-theme1/90">
+              Nestled in the serene Barog valley, offering breathtaking views and clean mountain air.
+            </p>
+            <div class="mt-5 border-t border-[#ded8d1] pt-4 transition group-hover:border-white/20">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#9b938b] transition group-hover:text-white">
+                Location
+              </span>
+            </div>
+          </div>
+
+          <!-- CARD 02 -->
+          <div class="group relative bg-white/80 p-7 transition duration-500 hover:bg-theme2 sm:p-8">
+            <div
+              class="absolute left-0 top-0 h-[4px] w-10 bg-theme2 group-hover:bg-theme1 transition-all duration-500 group-hover:w-full">
+            </div>
+            <div class="mb-4 flex items-center justify-between">
+              <span
+                class="font-serif text-[30px] font-light text-theme2/70 transition group-hover:text-theme1/70">02</span>
+              <span class="text-[15px] text-theme2/60 group-hover:text-theme1">◆</span>
+            </div>
+            <h3
+              class="font-serif text-[27px] font-light leading-[1.1] text-[#292521] transition group-hover:text-white">
+              Secure Living
+            </h3>
+            <p class="mt-4 text-sm leading-6 text-[#777068] transition group-hover:text-theme1/90">
+              24/7 security surveillance and a gated community designed for your peace of mind.
+            </p>
+            <div class="mt-5 border-t border-[#ded8d1] pt-4 transition group-hover:border-white/20">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#9b938b] transition group-hover:text-white">
+                Security
+              </span>
+            </div>
+          </div>
+
+          <!-- CARD 03 -->
+          <div class="group relative bg-white/80 p-7 transition duration-500 hover:bg-theme2 sm:p-8">
+            <div
+              class="absolute left-0 top-0 h-[4px] w-10 bg-theme2 group-hover:bg-theme1 transition-all duration-500 group-hover:w-full">
+            </div>
+            <div class="mb-4 flex items-center justify-between">
+              <span
+                class="font-serif text-[30px] font-light text-theme2/70 transition group-hover:text-theme1/70">01</span>
+              <span class="text-[15px] text-theme2/60 group-hover:text-theme1">◆</span>
+            </div>
+            <h3
+              class="font-serif text-[27px] font-light leading-[1.1] text-[#292521] transition group-hover:text-white">
+              Modern Connectivity
+            </h3>
+            <p class="mt-4 text-sm leading-6 text-[#777068] transition group-hover:text-theme1/90">
+              High-speed internet and excellent road connectivity to major cities and important destinations.
+            </p>
+            <div class="mt-5 border-t border-[#ded8d1] pt-4 transition group-hover:border-white/20">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#9b938b] transition group-hover:text-white">
+                Connectivity
+              </span>
+            </div>
+          </div>
+
+          <!-- CARD 04 -->
+          <div class="group relative bg-white/80 p-7 transition duration-500 hover:bg-theme2 sm:p-8">
+            <div
+              class="absolute left-0 top-0 h-[4px] w-10 bg-theme2 group-hover:bg-theme1 transition-all duration-500 group-hover:w-full">
+            </div>
+            <div class="mb-4 flex items-center justify-between">
+              <span
+                class="font-serif text-[30px] font-light text-theme2/70 transition group-hover:text-theme1/70">01</span>
+              <span class="text-[15px] text-theme2/60 group-hover:text-theme1">◆</span>
+            </div>
+            <h3
+              class="font-serif text-[27px] font-light leading-[1.1] text-[#292521] transition group-hover:text-white">
+              Premium Quality
+            </h3>
+            <p class="mt-4 text-sm leading-6 text-[#777068] transition group-hover:text-theme1/90">
+              Superior construction quality with high-end finishes and a carefully considered modern design.
+            </p>
+            <div class="mt-5 border-t border-[#ded8d1] pt-4 transition group-hover:border-white/20">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#9b938b] transition group-hover:text-white">
+                Craftsmanship
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PROJECT HIGHLIGHTS ======= -->
+  <section id="pr-oject" class="relative overflow-hidden bg-theme2 py-10 sm:py-15 lg:py-20">
+    <div class="mx-auto max-w-[1400px] px-5 text-white">
+      <!-- HEADER -->
+      <div>
+        <p class="my-3 text-xs uppercase font-semibold text-copper">Project Highlights</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-theme1 font-light">
+          Everything You Need.
+          <span class="text-white italic">
+            In One Place.
+          </span>
+        </h2>
+        <p class="mt-5 max-w-2xl text-[12px] font-light leading-6 sm:text-[13px] sm:leading-7">
+          A quick look at what Harisons Group Residences offers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+        <!-- CARD 1 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  01
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Community
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                Gated Township
+              </h3>
+              <!-- Description -->
+              <p class="mt-4 max-w-[330px] text-sm leading-6 text-black/85">
+                A planned environment bringing together residential blocks, green corridors, leisure spaces and
+                community facilities.
+              </p>
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images/about/gated-township.png" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+        </div>
+        <!-- CARD 2 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  02
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Residences
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                1 BHK Residences
+              </h3>
+              <!-- Description -->
+              <p class="mt-4 max-w-[330px] text-sm leading-6 text-black/85">
+                Comfortable 1 BHK residences designed
+                around practical living, natural light,
+                ventilation and the surrounding landscape.
+              </p>
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images/about/1BHK.png" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+        </div>
+        <!-- CARD 3 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images//about/barog-line-hill.png" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  03
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Ready Living
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                Micro Wind Turbine
+              </h3>
+              <!-- Description -->
+              <p class="mt-4 max-w-[330px] text-sm leading-6 text-black/85">
+                This system harnesses the natural wind corridors of Barog to generate clean, renewable energy for common areas.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- CARD 4 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images/about/mountain-view.png" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  04
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Connected To Nature
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                Mountain Views
+              </h3>
+              <!-- Description -->
+              <p class="mt-4 max-w-[330px] text-sm leading-6 text-black/85">
+                Balconies, windows and residence layouts are designed to create a connection with the surrounding
+                landscape.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- CARD 5 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  05
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Convenience
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                Digital Security
+              </h3>
+              <!-- Description -->
+              <p class="mt-4 max-w-[330px] text-sm leading-6 text-black/85">
+                At Harisons Group Residences, technology is not an intrusion — it is an invisible hand that elevates daily life.
+              </p>
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images/about/digital-security.jpeg" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+        </div>
+        <!-- CARD 6 -->
+        <div class="group relative grid grid-cols-2 overflow-hidden bg-theme1 hover:bg-theme1/90">
+          <!-- LEFT CONTENT -->
+          <div class="relative z-10 flex flex-col justify-between p-4 lg:p-8">
+            <!-- Decorative background -->
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl">
+            </div>
+            <!-- Top -->
+            <div>
+              <div class="flex items-center gap-5">
+                <span class="text-2xl font-light tracking-wide text-gray-500">
+                  06
+                </span>
+                <span class="h-px w-9 bg-theme2/30"></span>
+              </div>
+              <!-- Label -->
+              <p class="mt-8 text-[9px] font-semibold uppercase tracking-[0.32em] text-theme2">
+                Compliance
+              </p>
+              <!-- Title -->
+              <h3 class="mt-4 font-sans text-2xl font-normal leading-tight text-theme2/90 md:text-3xl">
+                RERA Registered
+              </h3>
+              <!-- Description -->
+              <p class="mt-3 text-sm leading-5 text-black/85">
+                Project information you can verify.
+              </p>
+              <p class="mt-6 text-sm font-medium tracking-[0.12em] text-black/85">
+                HPRERASOL2024119/P
+              </p>
+            </div>
+          </div>
+          <!-- RIGHT IMAGE -->
+          <div class="relative overflow-hidden md:min-h-full">
+            <img src="assets/images/about/register.png" alt="1 BHK Residences"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- Purple image overlay -->
+            <div
+              class="absolute inset-0 bg-[#5520d8]/25 mix-blend-multiply transition duration-500 group-hover:bg-[#5520d8]/10">
+            </div>
+            <!-- Gradient from left -->
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#5520d8]/60 to-transparent"></div>
+            <!-- Arrow Button -->
+            <div
+              class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-sm text-white transition duration-300 group-hover:bg-white group-hover:text-[#5520d8]">
+              ↗
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= BOTTOM CTA ====== -->
+      <div
+        class="mt-10 flex flex-col items-start justify-between gap-6 border-t border-[#e6e2dd] pt-8 sm:flex-row sm:items-center">
+
+        <p class="max-w-xl text-xs leading-5">
+          Thoughtfully planned residences, natural surroundings and
+          everyday conveniences come together in one mountain address.
+        </p>
+
+        <!-- CTA -->
+        <a href="#residences"
+          class="mt-8 inline-flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme2 bg-theme1 p-4 transition duration-300 hover:text-theme1 hover:bg-theme2 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+          Explore Residences →
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======= RESIDENCES ====== -->
+  <section id="living" class="bg-gray-200 py-10 sm:py-20 lg:py-20">
+    <div class="mx-auto max-w-[1400px] px-5">
+      <!-- HEADING -->
+      <div class="mb-10 lg:mb-12 text-center">
+        <p class="my-3 text-xs uppercase font-semibold text-copper">Find Your Home</p>
+        <h2 class="font-serif text-4xl md:text-5xl font-light">
+          Three ways to experience <span class="italic text-theme2"> mountain living </span>
+        </h2>
+        <p class="mt-5 text-[12px] leading-6 sm:text-sm">
+          Choose a residence based on the space, layout and views that suit your lifestyle.
+        </p>
+      </div>
+
+      <!-- BLOCK BUTTONS -->
+      <div class="residence-tabs mb-8 hidden overflow-x-auto border border-gray-300 lg:grid lg:grid-cols-3">
+        <!-- BLOCK 01 -->
+        <button type="button"
+          class="residence-tab active group relative flex min-w-[190px] items-center gap-3 px-7 py-5 text-left bg-theme1"
+          data-target="block-1">
+          <span
+            class="tab-number flex h-8 w-8 shrink-0 items-center justify-center border border-gray/40 bg-theme2/75 text-xs font-medium text-white">
+            01
+          </span>
+          <span>
+            <span class="tab-title block text-xs font-semibold uppercase tracking-[0.22em]">
+              Block 01
+            </span>
+            <span class="tab-title2 mt-1 block text-xl text-theme2">
+              752 Sq. Ft.
+            </span>
+          </span>
+          <span class="tab-line absolute bottom-0 left-0 h-[4px] w-full bg-theme2"></span>
+        </button>
+
+        <!-- BLOCK 02 -->
+        <button type="button"
+          class="residence-tab group relative flex min-w-[190px] items-center gap-3 px-7 py-5 text-left border-s border-r border-theme1"
+          data-target="block-2">
+          <span
+            class="tab-number flex h-8 w-8 shrink-0 items-center justify-center border border-gray/40 bg-theme2/75 text-xs font-medium text-white">
+            02
+          </span>
+          <span>
+            <span class="tab-title block text-xs font-semibold uppercase tracking-[0.22em] text-[#777068]">
+              Block 02
+            </span>
+            <span class="tab-title2 mt-1 block text-xl text-theme2">
+              772 Sq. Ft.
+            </span>
+          </span>
+          <span class="tab-line absolute bottom-0 left-0 hidden h-[4px] w-full bg-theme2"></span>
+        </button>
+
+        <!-- BLOCK 03 -->
+        <button type="button"
+          class="residence-tab group relative flex min-w-[190px] items-center gap-3 px-7 py-5 text-left"
+          data-target="block-3">
+          <span
+            class="tab-number flex h-8 w-8 shrink-0 items-center justify-center border border-gray/40 bg-theme2/75 text-xs font-medium text-white">
+            03
+          </span>
+          <span>
+            <span class="tab-title block text-xs font-semibold uppercase tracking-[0.22em] text-[#777068]">
+              Block 03
+            </span>
+            <span class="tab-title2 mt-1 block text-xl text-theme2">
+              998 Sq. Ft.
+            </span>
+          </span>
+          <span class="tab-line absolute bottom-0 left-0 hidden h-[4px] w-full bg-theme2"></span>
+        </button>
+
+      </div>
+
+      <!-- ======== BLOCK RESIDENCE ======== -->
+      <div class="residence-desktop-content lg:block">
+        <!-- BLOCK 01 -->
+        <div class="residence-panel lg:active active grid overflow-hidden bg-white lg:grid-cols-[1.1fr_0.9fr]"
+          data-content="block-1">
+          <!-- IMAGE -->
+          <div class="relative border border-rbdr bg-rsrf overflow-hidden fade-up in p-4">
+            <img src="assets/images/blocks/block_1A1.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 1
+            </div>
+            <img src="assets/images/blocks/block_1B1.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 1
+            </div>
+          </div>
+          <!-- CONTENT -->
+          <div class="flex flex-col justify-between p-10 lg:p-14">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium uppercase tracking-[0.3em] text-[#b8794f]">Residence Details</span>
+                <span class="font-serif text-[28px] font-light text-gray-500">01</span>
+              </div>
+              <h3 class="font-serif font-light text-3xl leading-tight tracking-[.08em] md:text-4xl uppercase">
+                Smart Luxury For Everyday Living.
+              </h3>
+              <p class="mt-4 text-sm leading-7 text-gray-600">
+                A thoughtfully planned 1 BHK residence designed around natural light, ventilation, privacy and
+                comfortable everyday living.
+              </p>
+              <div class="mt-10 border-y border-[#e5e0da]">
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Configuration</span>
+                  <span class="text-xs font-medium text-gray-700">1 BHK</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Area</span>
+                  <span class="text-xs font-medium text-gray-700">752 Sq. Ft.</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Feature</span>
+                  <span class="text-xs font-medium text-gray-700">Natural Light & Ventilation</span>
+                </div>
+                <div class="flex justify-between py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Parking</span>
+                  <span class="text-xs font-medium text-gray-700">Dedicated</span>
+                </div>
+              </div>
+            </div>
+            <a href="#residences_block-1"
+              class="mt-8 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.22em] text-theme1 bg-theme2 p-4 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              View Block 01 <span class="text-[15px]">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- BLOCK 02 -->
+        <div class="residence-panel lg:hidden active grid overflow-hidden bg-white lg:grid-cols-[1.1fr_0.9fr]"
+          data-content="block-2">
+          <div class="relative border border-rbdr bg-rsrf overflow-hidden fade-up in p-4">
+            <img src="assets/images/blocks/block_2A1.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 2
+            </div>
+            <img src="assets/images/blocks/block_2B1.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 2
+            </div>
+          </div>
+          <div class="flex flex-col justify-between p-10 lg:p-14">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium uppercase tracking-[0.3em] text-[#b8794f]">
+                  Residence Details
+                </span>
+                <span class="font-serif text-[28px] font-light text-gray-500">
+                  02
+                </span>
+              </div>
+              <h3 class="font-serif font-light text-3xl leading-tight tracking-[.08em] md:text-4xl uppercase">
+                Contemporary Comfort With A Mountain Sensibility.
+              </h3>
+              <p class="mt-6 max-w-lg text-[13px] leading-7 text-[#777068]">
+                Open-air balconies, engineered wood flooring, matte-finished cabinetry and premium materials create a
+                comfortable contemporary living environment.
+              </p>
+              <div class="mt-10 border-y border-[#e5e0da]">
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Configuration</span>
+                  <span class="text-xs font-medium text-gray-700">1 BHK</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Area</span>
+                  <span class="text-xs font-medium text-gray-700">772 Sq. Ft.</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Feature</span>
+                  <span class="text-xs font-medium text-gray-700">Open-Air Balcony</span>
+                </div>
+                <div class="flex justify-between py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Parking</span>
+                  <span class="text-xs font-medium text-gray-700">Dedicated</span>
+                </div>
+              </div>
+            </div>
+            <a href="/residences/block-2"
+              class="mt-8 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.22em] text-theme1 bg-theme2 p-4 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              View Block 02 <span class="text-[15px]">→</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- BLOCK 03 -->
+        <div class="residence-panel lg:hidden active grid overflow-hidden bg-white lg:grid-cols-[1.1fr_0.9fr]"
+          data-content="block-3">
+          <div class="relative border border-rbdr bg-rsrf overflow-hidden fade-up in p-4">
+            <img src="assets/images/blocks/block_3A2.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 3
+            </div>
+            <img src="assets/images/blocks/block_3B1.png"
+              alt="Block 3 — 998 Sq.Ft. Super Premium floor plan placeholder" class="w-full block object-cover">
+            <div class="px-[1.1rem] py-[.7rem] bg-rs2 border-t border-rbdr text-[.78rem] text-rmuted text-center">
+              Block 3
+            </div>
+          </div>
+          <div class="flex flex-col justify-between p-10 lg:p-14">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium uppercase tracking-[0.3em] text-[#b8794f]">
+                  Residence Details
+                </span>
+                <span class="font-serif text-[28px] font-light text-gray-500">
+                  03
+                </span>
+              </div>
+              <h3 class="font-serif font-light text-3xl leading-tight tracking-[.08em] md:text-4xl uppercase">
+                More Space. More Light. More Of The View.
+              </h3>
+              <p class="mt-6 max-w-lg text-[13px] leading-7 text-[#777068]">
+                A larger one-bedroom luxury suite with dual balconies and floor-to-ceiling windows designed around
+                panoramic Himalayan views.
+              </p>
+              <div class="mt-10 border-y border-[#e5e0da]">
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Configuration</span>
+                  <span class="text-xs font-medium text-gray-700">1 BHK Luxury Suite</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Area</span>
+                  <span class="text-xs font-medium text-gray-700">998 Sq. Ft.</span>
+                </div>
+                <div class="flex justify-between border-b border-[#e5e0da] py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Feature</span>
+                  <span class="text-xs font-medium text-gray-700">Dual Balconies</span>
+                </div>
+                <div class="flex justify-between py-4">
+                  <span class="text-xs uppercase tracking-[0.22em] text-gray-500">Parking</span>
+                  <span class="text-xs font-medium text-gray-700">Dedicated</span>
+                </div>
+              </div>
+            </div>
+            <a href="/residences/block-3"
+              class="mt-8 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.22em] text-theme1 bg-theme2 p-4 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              View Block 03 <span class="text-[15px]">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const tabs = document.querySelectorAll(".residence-tab");
+      const panels = document.querySelectorAll(".residence-panel");
+
+      tabs.forEach(function (tab) {
+
+        tab.addEventListener("click", function () {
+
+          const target = this.dataset.target;
+
+          /* Reset tabs */
+
+          tabs.forEach(function (item) {
+
+            item.classList.remove("active");
+
+            const number = item.querySelector(".tab-number");
+            const title = item.querySelector(".tab-title");
+            const title2 = item.querySelector(".tab-title2");
+            const line = item.querySelector(".tab-line");
+
+            item.classList.remove("bg-theme1");
+
+            // number.classList.remove(
+            //   "border-theme1",
+            //   "bg-theme1/75",
+            //   "text-white"
+            // );
+
+            // number.classList.add(
+            //   "border-[#d8d2cb]",
+            //   "text-[#948b83]"
+            // );
+
+            // title.classList.remove("text-white");
+            title.classList.add("text-[#777068]");
+
+            // title2.classList.remove("text-theme2");
+            // title2.classList.add("text-theme2");
+
+            line.classList.add("hidden");
+
+          });
+
+
+          /* Activate clicked tab */
+
+          this.classList.add("active");
+
+          const tab = this.querySelector(".residence-tab");
+          const number = this.querySelector(".tab-number");
+          const title = this.querySelector(".tab-title");
+          const title2 = this.querySelector(".tab-title2");
+          const line = this.querySelector(".tab-line");
+
+          this.classList.add("bg-theme1");
+
+          // number.classList.remove(
+          //   "border-[#d8d2cb]",
+          //   "text-[#948b83]"
+          // );
+
+          // number.classList.add(
+          //   "border-theme2",
+          //   "bg-theme2/75",
+          //   "text-white"
+          // );
+
+          title.classList.remove("text-[#777068]");
+          // title.classList.add("text-white");
+
+          // title2.classList.remove("text-theme2");
+          // title2.classList.add("text-theme2");
+
+          line.classList.remove("hidden");
+
+
+          /* Reset panels */
+
+          panels.forEach(function (panel) {
+
+            panel.classList.add("lg:hidden");
+            panel.classList.remove("lg:active");
+
+          });
+
+
+          /* Show selected panel */
+
+          const activePanel =
+            document.querySelector(
+              '.residence-panel[data-content="' + target + '"]'
+            );
+
+          if (activePanel) {
+
+            activePanel.classList.remove("lg:hidden");
+
+            activePanel.classList.add("lg:active");
+
+          }
+
+        });
+
+      });
+
+    });
+  </script>
+
+  <!-- ====  LOCATION  ====== -->
+  <section id="location" class="bg-theme2 py-10 lg:py-20">
+    <div class="mx-auto max-w-[1400px] px-5">
+      <!-- HEADER -->
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-xs uppercase font-semibold text-copper">Location</span>
+          </div>
+          <h2 class="font-serif font-light text-4xl md:text-5xl text-white">Well Connected.
+            <span class="italic text-theme1">Beautifully Placed.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-4 lg:col-start-9">
+          <p class="text-[12px] leading-7 text-white/70 sm:text-[13px]">
+            Experience the calm of mountain living while staying connected
+            to the cities, destinations and everyday conveniences that matter.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- ======  MAP + LOCATIONS ====== -->
+      <div class="mt-12 grid grid-cols-1 overflow-hidden bg-theme1 lg:mt-16 lg:grid-cols-12">
+        <!-- ==== LEFT — LIVE MAP ==== -->
+        <div class="relative h-[500px] lg:col-span-7 lg:h-[100%] order-1 lg:order-0">
+          <!-- MAP -->
+          <div id="harisonsMap" class="absolute inset-0 z-0"></div>
+          <!-- MAP LABEL -->
+          <div class="absolute right-6 top-6 z-[500]">
+            <div class="flex items-center gap-3 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm">
+              <span class="h-2 w-2 rounded-full bg-[#c98963]"></span>
+              <span class="text-[8px] font-semibold uppercase tracking-[0.25em] text-[#292521]">
+                Harisons Homes
+              </span>
+            </div>
+          </div>
+
+          <!-- SELECTED LOCATION TOAST -->
+          <div id="distToast"
+            class="absolute bottom-6 left-6 right-6 z-[500] hidden max-w-[390px] bg-theme2/90 p-4 shadow-xl backdrop-blur-md">
+            <div class="flex items-start justify-between gap-5">
+              <div>
+                <span class="text-xs uppercase text-theme1/80">
+                  Selected Destination
+                </span>
+                <h4 id="toastName" class="mt-2 font-serif text-[25px] font-light text-white">
+                  Chandigarh
+                </h4>
+                <div class="mt-2 flex items-center gap-3 text-sm text-white/90">
+                  <span id="toastKm">
+                    60 km
+                  </span>
+                  <span class="h-1 w-1 rounded-full bg-[#c98963]"></span>
+                  <span id="toastTime">
+                    60 min
+                  </span>
+                </div>
+              </div>
+              <button id="toastClose" type="button"
+                class="text-lg font-light text-white/50 transition hover:text-white">
+                ×
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- =====  RIGHT — LOCATION SIDEBAR ====== -->
+        <div class="flex flex-col justify-between p-7 sm:p-10 lg:col-span-5 order-0 lg:order-1 lg:p-12">
+          <!-- INTRO -->
+          <div>
+            <h3 class="font-serif font-light text-2xl leading-tight md:text-3xl text-black/75">
+              Close to DELHI/NCR. Close To CHANDIGARH. Close To <span class="text-theme1 italic">NATURE.</span>
+            </h3>
+          </div>
+
+          <!-- LOCATION BUTTONS -->
+          <div class="mt-10">
+            <div class="mb-4 flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-theme2/50">
+                Key Destinations
+              </span>
+              <span class="text-xs uppercase tracking-[0.1em] text-theme2/70">
+                Select
+              </span>
+            </div>
+
+            <div class="divide-y divide-theme2/30">
+              <!-- DELHI NCR -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Delhi NCR" data-km="Approx. 300 km" data-time="Approx. 5.5 Hours" data-lat="28.6139"
+                data-lng="77.2090">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    01
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Delhi NCR
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 300 KM
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- CHANDIGARH -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="CHANDIGARH" data-km="Approx. 300 km" data-time="Approx. 5.5 Hours" data-lat="30.7333"
+                data-lng="76.7794">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    02
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Chandigarh
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 60 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-theme2/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- SHIMLA -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Shimla" data-km="Approx. 45 km" data-time="Approx. 45 min" data-lat="31.1048"
+                data-lng="77.1734">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    03
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Shimla
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 45 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- KASAULI -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Kasauli" data-km="Approx. 17 km" data-time="Approx. 22 min" data-lat="30.8986"
+                data-lng="76.9651">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    04
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Kasauli
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 17 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- SOLAN -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Solan" data-km="Approx. 15 km" data-time="Approx. 25 min" data-lat="30.9045"
+                data-lng="77.0967">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    05
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Solan
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 15 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- BAROG RAILWAY STATION -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Barog Railway Station" data-km="Approx. 4 km" data-time="Approx. 8 min" data-lat="30.8766"
+                data-lng="77.0806">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    06
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Barog Railway Station
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 4 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+              <!-- CHANDIGARH AIRPORT -->
+              <button type="button" class="loc-btn group flex w-full items-center justify-between py-3 px-5 text-left"
+                data-name="Chandigarh Airport" data-km="Approx. 65 km" data-time="Approx. 1 hr 3 min" data-lat="30.6735"
+                data-lng="76.7885">
+                <div class="flex items-center gap-4">
+                  <span class="loc-number font-serif text-[17px] font-light text-black/50">
+                    07
+                  </span>
+                  <div>
+                    <span class="loc-title block text-sm uppercase text-theme2/90 transition">
+                      Chandigarh Airport
+                    </span>
+                    <span class="mt-1 block text-xs text-theme2/70">
+                      Approx. 65 km
+                    </span>
+                  </div>
+                </div>
+                <span class="loc-arrow text-black/30 transition group-hover:translate-x-1 group-hover:text-[#c98963]">
+                  →
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- MAP LINK -->
+          <a href="https://maps.app.goo.gl/2Q6X9XmazQQbTkzi9" target="_blank" rel="noopener noreferrer"
+            class="mt-8 group flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme1 bg-theme2 p-4 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:shadow-sm hover:outline-2 hover:outline hover:outline-theme2/40">
+            Explore Residences <span class="text-[16px] transition-transform duration-300 group-hover:translate-x-1"> →
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+
+      const projectLocation = {
+        lat: 30.88985487802186,
+        lng: 77.06465817577957
+      };
+
+      // -----------------------------------------
+      // MAP
+      // -----------------------------------------
+      const map = L.map('harisonsMap', {
+        scrollWheelZoom: false
+      }).setView(
+        [projectLocation.lat, projectLocation.lng],
+        10
+      );
+
+      L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }
+      ).addTo(map);
+
+
+      // -----------------------------------------
+      // PROJECT MARKER
+      // -----------------------------------------
+      const projectIcon = L.divIcon({
+        className: '',
+        html: '<div class="harisons-project-marker"></div>',
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+      });
+
+      const projectMarker = L.marker(
+        [projectLocation.lat, projectLocation.lng],
+        {
+          icon: projectIcon
+        }
+      )
+        .addTo(map)
+        .bindPopup(
+          '<strong>Harisons Homes</strong><br>Project Location'
+        ).openPopup();
+
+      // -----------------------------------------
+      // ELEMENTS
+      // -----------------------------------------
+      const buttons = document.querySelectorAll('.loc-btn');
+
+      const toast = document.getElementById('distToast');
+      const toastName = document.getElementById('toastName');
+      const toastKm = document.getElementById('toastKm');
+      const toastTime = document.getElementById('toastTime');
+      const toastClose = document.getElementById('toastClose');
+
+      let activeMarker = null;
+      let activeRoute = null;
+
+      // -----------------------------------------
+      // LOCATION MARKER
+      // -----------------------------------------
+      function createLocationMarker(lat, lng, name) {
+        const locationIcon = L.divIcon({
+          className: '',
+          html: '<div class="harisons-marker"></div>',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7]
+        });
+
+        return L.marker(
+          [lat, lng],
+          {
+            icon: locationIcon
+          }
+        )
+          .addTo(map)
+          .bindPopup(
+            '<strong>' + name + '</strong>'
+          ).openPopup();
+      }
+
+      // -----------------------------------------
+      // ROAD ROUTE
+      // -----------------------------------------
+      async function drawRoadRoute(lat, lng) {
+        // Remove previous route
+        if (activeRoute) {
+          map.removeLayer(activeRoute);
+          activeRoute = null;
+        }
+
+        /*
+         * OSRM:
+         *
+         * selected location
+         *        ↓
+         * actual road
+         *        ↓
+         * project
+         */
+        const url =
+          'https://router.project-osrm.org/route/v1/driving/' +
+          lng + ',' + lat + ';' +
+          projectLocation.lng + ',' + projectLocation.lat +
+          '?overview=full&geometries=geojson';
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (
+            !data.routes ||
+            !data.routes.length
+          ) {
+            console.log('Route not found');
+            return;
+          }
+
+          const route = data.routes[0];
+          // ---------------------------------
+          // DRAW ROAD ROUTE
+          // ---------------------------------
+
+          activeRoute = L.geoJSON(
+            route.geometry,
+            {
+              style: {
+                color: '#6f3ae0',
+                weight: 5,
+                opacity: 0.9,
+                lineCap: 'round',
+                lineJoin: 'round'
+              }
+            }
+          ).addTo(map);
+
+
+          // ---------------------------------
+          // FIT MAP TO ROUTE
+          // ---------------------------------
+          map.fitBounds(
+            activeRoute.getBounds(),
+            {
+              paddingTopLeft: [40, 40],
+              paddingBottomRight: [40, 40],
+              maxZoom: 12,
+              animate: true
+            }
+          );
+
+          // ---------------------------------
+          // OPTIONAL:
+          // Actual route distance
+          // ---------------------------------
+          const actualKm = (route.distance / 1000).toFixed(1);
+
+          // Actual duration
+          const actualMinutes = Math.round(route.duration / 60);
+
+          /*
+           * Agar aap actual route distance/time
+           * dikhana chahte ho to yahan update hoga.
+           */
+          toastKm.textContent = actualKm + ' km';
+          toastTime.textContent = formatDuration(actualMinutes);
+
+        } catch (error) {
+          console.error(
+            'Route loading error:',
+            error
+          );
+        }
+      }
+
+
+      // -----------------------------------------
+      // TIME FORMAT
+      // -----------------------------------------
+      function formatDuration(minutes) {
+        if (minutes < 60) {
+          return minutes + ' min';
+        }
+
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+
+        if (mins === 0) {
+          return hours + ' hr';
+        }
+        return hours + ' hr ' + mins + ' min';
+      }
+
+      // -----------------------------------------
+      // SHOW LOCATION
+      // -----------------------------------------
+      async function showLocation(button) {
+        const name = button.dataset.name;
+        const lat = parseFloat(button.dataset.lat);
+        const lng = parseFloat(button.dataset.lng);
+
+        // Remove previous marker
+        if (activeMarker) {
+          map.removeLayer(
+            activeMarker
+          );
+        }
+
+        // Create new marker
+        activeMarker =
+          createLocationMarker(
+            lat,
+            lng,
+            name
+          );
+
+        // Active button
+        buttons.forEach(function (btn) {
+          btn.classList.remove(
+            'active'
+          );
+        });
+        button.classList.add(
+          'active'
+        );
+
+        // Toast
+        toastName.textContent =
+          name;
+        toastKm.textContent =
+          'Calculating...';
+        toastTime.textContent =
+          'Calculating...';
+        toast.classList.remove(
+          'hidden'
+        );
+
+        // Draw actual road route
+        await drawRoadRoute(
+          lat,
+          lng
+        );
+      }
+
+      // -----------------------------------------
+      // BUTTON EVENTS
+      // -----------------------------------------
+      buttons.forEach(function (button) {
+        button.addEventListener(
+          'click',
+          function () {
+            showLocation(
+              button
+            );
+          }
+        );
+      });
+
+      // -----------------------------------------
+      // CLOSE
+      // -----------------------------------------
+
+      if (toastClose) {
+        toastClose.addEventListener(
+          'click',
+          function () {
+            toast.classList.add(
+              'hidden'
+            );
+            buttons.forEach(
+              function (btn) {
+                btn.classList.remove(
+                  'active'
+                );
+              }
+            );
+            if (activeRoute) {
+              map.removeLayer(
+                activeRoute
+              );
+              activeRoute = null;
+            }
+            if (activeMarker) {
+              map.removeLayer(
+                activeMarker
+              );
+              activeMarker = null;
+
+            }
+            map.setView(
+              [
+                projectLocation.lat,
+                projectLocation.lng
+              ],
+              10
+            );
+          }
+        );
+      }
+
+
+      // -----------------------------------------
+      // DEFAULT LOCATION
+      // -----------------------------------------
+      if (buttons.length) {
+        showLocation(
+          buttons[0]
+        );
+      }
+
+      // Fix Leaflet size
+      setTimeout(function () {
+        map.invalidateSize();
+      }, 500);
+    })();
+  </script>
+
+  <!-- ======= AMENITIES / GALLERY ======== -->
+  <section id="gallery" class="bg-[#f5f3ef] py-10 lg:py-20">
+    <div class="mx-auto max-w-[1400px] px-5">
+      <!-- HEADER -->
+      <div class="mb-6 grid grid-cols-1 lg:mb-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-xs uppercase font-semibold text-copper">Amenities</span>
+          </div>
+          <h2 class="font-serif font-light text-4xl md:text-5xl">Designed Around
+            <span class="block italic text-theme2">The Way You Live. </span>
+          </h2>
+        </div>
+        <div class="lg:col-span-4 lg:col-start-9">
+          <p class="text-sm leading-7 text-[#777068]">
+            Every detail is considered to make everyday living more comfortable,
+            connected and enjoyable — from peaceful gardens to spaces made for
+            community and wellness.
+          </p>
+        </div>
+      </div>
+
+      <div class="swiper mySwiper overflow-hidden">
+        <div class="swiper-wrapper" id="sliderWrapper"></div>
+        <!-- <div class="swiper-pagination !static mt-8"></div> -->
+      </div>
+
+      <!-- ==== BOTTOM LINE ====== -->
+      <div
+        class="mt-10 flex flex-col gap-5 border-t border-[#d9d3cc] pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-center gap-3">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#c98963]"></span>
+          <span class="text-sm font-semibold uppercase tracking-[0.3em] text-[#777068]">
+            Life At Harisons
+          </span>
+        </div>
+        <p class="font-serif text-[16px] italic text-[#625b54]">
+          Spaces that make coming home feel different.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+
+    const sliderData = [
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-block-2.png",
+        title: "Block 2"
+      },
+      {
+        image: "assets/images/gallery/img01.png",
+        title: "Fitness Studios"
+      },
+      {
+        image: "assets/images/gallery/img02.png",
+        title: "Wellness Spas"
+      },
+      {
+        image: "assets/images/gallery/img03.jpeg",
+        title: "Club House"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-balcony-view-1-snow.png",
+        title: "Balcony View 1 Snow"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-block-3-interior-2-snow.png",
+        title: "Block 3 Interior 2 Snow"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-entry-gate.png",
+        title: "Entry Gate"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-gazebo.png",
+        title: "Gazebo"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-internal-rd-snow.png",
+        title: "Internal Road Snow"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-micro-wind.png",
+        title: "Micro Wind"
+      },
+      {
+        image: "https://risingnexusinfra.com/assets/images/projects/slider-sunken-bonfire-pit.png",
+        title: "Sunken Bonfire Pit"
+      }
+
+    ];
+
+    const wrapper = document.getElementById("sliderWrapper");
+    // Create slides
+    sliderData.forEach((item) => {
+      const slide = document.createElement("div");
+      slide.className = "swiper-slide";
+
+      slide.innerHTML = `
+            <div class="overflow-hidden bg-white">
+                <img
+                    src="${item.image}"
+                    alt="${item.title}"
+                    class="block h-[280px] w-full object-cover"
+                >
+                <div class="px-4 py-5 text-center">
+                    <h3 class="text-[1.2rem] text-gray-900">
+                        ${item.title}
+                    </h3>
+                </div>
+            </div>
+        `;
+      wrapper.appendChild(slide);
+    });
+
+    // Initialize Swiper AFTER slides are created
+    const swiper = new Swiper(".mySwiper", {
+
+      slidesPerView: 1,
+
+      spaceBetween: 20,
+
+      loop: true,
+
+      speed: 700,
+
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+
+      breakpoints: {
+
+        // Mobile
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 15,
+        },
+
+        // Small tablet
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+
+        // Desktop
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+
+        // Large desktop
+        1280: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        }
+
+      }
+
+    });
+
+  </script>
+
+  <!-- ======= SURROUNDINGS & QUALITY =========== -->
+  <section class="bg-theme2 py-20 max-md:py-14">
+    <div class="max-w-[1400px] mx-auto px-5">
+      <!-- ======= SECTION INTRO ======== -->
+      <div class="max-w-3xl mb-14">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-xs uppercase font-semibold text-copper">Nearby Attractions</span>
+        </div>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-white">Explore the
+          <span class="italic text-theme1">surroundings.</span>
+        </h2>
+      </div>
+
+      <!-- ======= TWO COLUMN LAYOUT ======== -->
+      <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1fr] gap-8 lg:gap-12">
+        <div class="divide-y divide-[#dedbd7]">
+
+          <!-- Attraction 01 -->
+          <div data-index="0"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">01</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Barog Tunnel
+                  No. 33
+                </h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">A landmark of Himalayan railway heritage
+                </p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">3 KM · 6 MIN</span>
+          </div>
+
+          <!-- Attraction 02 -->
+          <div data-index="1"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">02</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Grave of
+                  Colonel Barog
+                </h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">A part of Barog's history</p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">3 KM · 6 MIN</span>
+          </div>
+
+          <!-- Attraction 03 -->
+          <div data-index="2"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">03</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Choor
+                  Chandni Peak</h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">Mountain views & outdoor exploration</p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">5 KM · 20 MIN</span>
+          </div>
+
+          <!-- Attraction 04 -->
+          <div data-index="3"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">04</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Jatoli Shiva
+                  Temple
+                </h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">A spiritual landmark in the hills</p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">7 KM · 15 MIN</span>
+          </div>
+
+          <!-- Attraction 05 -->
+          <div data-index="4"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">05</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Dolanji Bon
+                  Monastery
+                </h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">A quiet place to reconnect</p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">9 KM · 18 MIN</span>
+          </div>
+
+          <!-- Attraction 06 -->
+          <div data-index="5"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">06</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Karol Tibba
+                </h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">Trails, forests & mountain experiences
+                </p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">NEARBY</span>
+          </div>
+
+          <!-- Attraction 07 -->
+          <div data-index="6"
+            class="attraction-card group flex items-center justify-between py-4 px-2 hover:bg-theme1 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-white/70 pt-1 group-hover:text-black/60">07</span>
+              <div>
+                <h4 class="font-serif font-light italic text-2xl text-theme1/80 group-hover:text-theme2/80">Dagshai
+                  Cantonment</h4>
+                <p class="text-sm text-white/70 mt-1 group-hover:text-black/70">History and heritage in the hills</p>
+              </div>
+            </div>
+            <span class="text-md text-white group-hover:text-black whitespace-nowrap">NEARBY</span>
+          </div>
+
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-full overflow-hidden">
+            <!-- ID aur Smooth Transition ke liye classes -->
+            <img id="attraction-image" src="assets/images/attrections/01.png" alt="Attraction Image"
+              class="aspect-[6/5] w-full object-cover transition-all duration-300 ease-in-out border-b-[8px] border-r-[8px] border-theme1 rounded-2xl">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Array/Object me serial-wise images ke paths
+      const attractionImages = [
+        "assets/images/attrections/01.png",
+        "assets/images/attrections/02.jpg",
+        "assets/images/attrections/03.webp",
+        "assets/images/attrections/04.png",
+        "assets/images/attrections/05.png",
+        "assets/images/attrections/06.png",
+        "assets/images/attrections/07.png"
+      ];
+
+      const mainImage = document.getElementById("attraction-image");
+      const cards = document.querySelectorAll(".attraction-card");
+
+      cards.forEach((card) => {
+        // Mouseenter (Hover) event
+        card.addEventListener("mouseenter", () => {
+          const index = card.getAttribute("data-index");
+
+          if (attractionImages[index]) {
+            // Smooth fade effect ke liye opacity change
+            mainImage.style.opacity = "0.4";
+
+            setTimeout(() => {
+              mainImage.src = attractionImages[index];
+              mainImage.style.opacity = "1";
+            }, 150);
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- ===== CONTACT / FINAL CTA ========= -->
+  <section id="contact" class="bg-gray-200 py-10 md:py-20 max-md:py-14">
+    <div class="max-w-[1400px] mx-auto px-5">
+      <!-- Section Heading -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-xs uppercase font-semibold text-copper">Your mountain home</span>
+        </div>
+        <h2 class="font-serif font-light text-4xl md:text-5xl">Ready to
+          <span class="italic text-theme2">Experience Barog </span> differently?
+        </h2>
+      </div>
+
+      <!-- ========== FORM + CONTACT INFO =========== -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- =========  LEFT : ENQUIRY FORM ========== -->
+        <div class="bg-white p-7 md:p-10 lg:p-12">
+          <div class="mb-8">
+            <span class="block text-xs uppercase tracking-[0.08em] text-theme2 font-semibold mb-3">
+              Book a Site Visit
+            </span>
+            <h3 class="text-2xl md:text-3xl font-serif font-light text-[#171311]">
+              Let's connect.
+            </h3>
+            <p class="mt-3 text-sm leading-6 text-gray-500 max-w-md">
+              Our team can help you understand the available
+              residences, project details and next steps.
+            </p>
+          </div>
+          <form action="#" method="POST" class="space-y-5">
+            <!-- Name -->
+            <div>
+              <label for="name" class="block text-[10px] uppercase tracking-[0.08em] text-gray-600 mb-2">
+                Full Name
+              </label>
+              <input type="text" id="name" name="name" placeholder="Enter your name"
+                class="w-full border-0 border-b border-[#d8d5d2] bg-transparent px-0 py-3 text-[13px] text-[#171311] placeholder:text-[#aaa5a1] focus:border-[#7040df] focus:ring-0 outline-none transition-colors">
+            </div>
+            <!-- Phone -->
+            <div>
+              <label for="phone" class="block text-[10px] uppercase tracking-[0.08em] text-gray-600 mb-2">
+                Phone Number
+              </label>
+              <input type="tel" id="phone" name="phone" placeholder="+91" class="w-full border-0 border-b border-[#d8d5d2] bg-transparent px-0 py-3 text-[13px] text-[#171311] placeholder:text-[#aaa5a1] focus:border-[#7040df] focus:ring-0 outline-none
+                                   transition-colors">
+            </div>
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-[10px] uppercase tracking-[0.08em] text-gray-600 mb-2">
+                Email Address
+              </label>
+              <input type="email" id="email" name="email" placeholder="Enter your email"
+                class="w-full border-0 border-b border-[#d8d5d2] bg-transparent px-0 py-3 text-[13px] text-[#171311] placeholder:text-[#aaa5a1] focus:border-[#7040df] focus:ring-0 outline-none transition-colors">
+            </div>
+            <!-- Requirement -->
+            <div>
+              <label for="requirement" class="block text-[10px] uppercase tracking-[0.08em] text-gray-600 mb-2">
+                I'm Interested In
+              </label>
+              <select id="requirement" name="requirement"
+                class="w-full border-0 border-b border-[#d8d5d2] bg-transparent px-0 py-3 text-[13px] text-[#171311] focus:border-[#7040df] focus:ring-0 outline-none transition-colors">
+                <option value="">Select an option</option>
+                <option value="block-1">Block 1 — 752 Sq. Ft.</option>
+                <option value="block-2">Block 2 — 772 Sq. Ft.</option>
+                <option value="block-3">Block 3 — 998 Sq. Ft.</option>
+                <option value="site-visit">Book a Site Visit</option>
+                <option value="general">General Enquiry</option>
+              </select>
+            </div>
+            <!-- Message -->
+            <div>
+              <label for="message" class="block text-[10px] uppercase tracking-[0.08em] text-gray-600 mb-2">
+                Message
+              </label>
+              <textarea id="message" name="message" rows="3" placeholder="Tell us how we can help..."
+                class="w-full resize-none border-0 border-b border-[#d8d5d2] bg-transparent px-0 py-3 text-[13px] text-[#171311] placeholder:text-[#aaa5a1] focus:border-[#7040df] focus:ring-0 outline-none transition-colors"></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit"
+              class="mt-8 group flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme1 bg-theme2 p-4 transition duration-300 hover:text-theme2 hover:bg-theme1 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              Send Enquiry
+              <span>→</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- ======== RIGHT : CONTACT INFORMATION ========= -->
+        <div class="bg-theme2 text-white p-7 md:p-10 lg:p-12">
+          <!-- Heading -->
+          <div class="mb-10">
+            <span class="block text-xs uppercase tracking-[0.08em] text-theme1 mb-3">
+              Contact Harisons
+            </span>
+            <h3 class="text-2xl md:text-3xl font-serif font-light leading-tight">
+              Harisons Builder
+            </h3>
+            <p class="mt-3 text-sm text-white/80">
+              Barog, Himachal Pradesh
+            </p>
+          </div>
+
+          <!-- Contact Details -->
+          <div class="divide-y divide-white/10">
+            <!-- Phone -->
+            <div class="py-6 first:pt-0">
+              <span class="block text-[10px] uppercase tracking-[0.12em] text-theme1 mb-3">
+                Call Us
+              </span>
+              <div class="flex flex-col gap-1">
+                <a href="tel:+919417400003" class="text-[17px] font-light hover:text-[#a98af5] transition-colors">
+                  +91 94174 00003
+                </a>
+                <a href="tel:+919041320222" class="text-[17px] font-light hover:text-[#a98af5] transition-colors">
+                  +91 90413 20222
+                </a>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="py-6">
+              <span class="block text-[10px] uppercase tracking-[0.12em] text-theme1 mb-3">
+                Email
+              </span>
+              <div class="flex flex-col gap-2">
+                <a href="mailto:admin@barogvalley.com"
+                  class="text-[12px] text-white/75 hover:text-[#a98af5] transition-colors break-all">
+                  admin@barogvalley.com
+                </a>
+                <a href="mailto:barogvalleyview@barogvalley.com"
+                  class="text-[12px] text-white/75 hover:text-[#a98af5] transition-colors break-all">
+                  barogvalleyview@barogvalley.com
+                </a>
+                <a href="mailto:ganeriwala@harisonhomes.com"
+                  class="text-[12px] text-white/75 hover:text-[#a98af5] transition-colors break-all">
+                  ganeriwala@harisonhomes.com
+                </a>
+              </div>
+            </div>
+            <!-- Office Hours -->
+            <div class="py-6">
+              <span class="block text-[10px] uppercase tracking-[0.12em] text-theme1 mb-3">
+                Office Hours
+              </span>
+              <div class="space-y-1 text-[12px] text-white/70">
+                <p>
+                  Monday – Saturday
+                  <span class="text-white/30">|</span>
+                  9:00 AM – 6:00 PM
+                </p>
+                <p>
+                  Sunday
+                  <span class="text-white/30">|</span>
+                  By Appointment
+                </p>
+              </div>
+            </div>
+
+            <!-- RERA -->
+            <div class="py-6">
+              <span class="block text-[10px] uppercase tracking-[0.12em] text-theme1 mb-3">
+                RERA
+              </span>
+              <p class="text-[12px] text-white/75">
+                HPRERASOL2024119/P
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Buttons -->
+          <div class="flex flex-wrap gap-3 mt-4">
+            <a href="#"
+              class="mt-4 group inline items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme2 bg-theme1 p-4 transition duration-300 hover:text-theme1 hover:bg-theme2 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              Contact Us
+              <span>→</span>
+            </a>
+            <a href="#"
+              class="mt-4 group inline items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-theme2 bg-theme1 p-4 transition duration-300 hover:text-theme1 hover:bg-theme2 hover:shadow-sm hover:outline-white hover:outline hover:outline-white/20">
+              Get Directions
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ========== -->
+  <footer class="bg-theme2 text-white">
+    <div class="max-w-[1400px] mx-auto px-5">
+      <!-- ========= TOP FOOTER ========== -->
+      <div class="py-10 md:py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_0.9fr_0.9fr] gap-12 lg:gap-10">
+          <!-- ======== BRAND ========== -->
+          <div class="lg:pr-16">
+            <!-- Logo / Brand -->
+            <a href="#" class="inline-block">
+              <img src="assets/images/logo/logo.png" alt="Logo" class="max-w-[100px]">
+            </a>
+
+            <!-- Location -->
+            <div class="mt-7">
+              <p class="text-[11px] text-white/80">
+                Harisons Builder
+              </p>
+              <p class="mt-1 text-[11px] text-white/80">
+                Barog, Himachal Pradesh
+              </p>
+            </div>
+          </div>
+
+          <!-- ========== QUICK LINKS =========== -->
+          <div>
+            <h3 class="text-[11px] uppercase tracking-[0.22em] text-theme1/80 font-semibold mb-6">
+              Quick Links
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Gallery
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- ======== INFORMATION =========== -->
+          <div>
+            <h3 class="text-[11px] uppercase tracking-[0.22em] text-theme1/80 font-semibold mb-6">
+              Project Details
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  The Project
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Living
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Location
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-[12px] text-white/65 hover:text-theme1 transition-colors">
+                  Construction Updates
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- ========= DEVELOPER / PARTNER ========== -->
+          <!-- ========= GET IN TOUCH / FOOTER CONTACT SECTION ============ -->
+          <div class="space-y-6 text-white">
+            <!-- Heading -->
+            <h3 class="text-[11px] uppercase tracking-[0.22em] text-theme1/80 font-semibold mb-6">
+              GET IN TOUCH
+            </h3>
+
+            <div class="space-y-4">
+              <!-- Email ID Block -->
+              <div class="flex items-start gap-4">
+                <!-- Email Icon -->
+                <div class="mt-1 text-theme1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path
+                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">
+                    EMAIL ID
+                  </p>
+                  <a href="mailto:admin@barogvalley.com"
+                    class="text-sm font-medium text-white/90 hover:text-white transition-colors">
+                    admin@barogvalley.com
+                  </a>
+                </div>
+              </div>
+
+              <!-- Contact No. Block -->
+              <div class="flex items-start gap-4">
+                <!-- Phone Icon -->
+                <div class="mt-1 text-theme1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">
+                    CONTACT NO.
+                  </p>
+                  <a href="tel:+919417400003"
+                    class="text-sm font-medium text-white/90 hover:text-white transition-colors">
+                    +91 94174 00003
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== FOOTER DIVIDER ========= -->
+      <div class="border-t border-white/10"></div>
+
+      <!-- ========= BOTTOM FOOTER ============ -->
+      <div class="py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <!-- Copyright -->
+        <p class="text-[9px] uppercase tracking-[0.12em] text-white/90">
+          © 2026 Harisons Builder. All rights reserved.
+        </p>
+        <!-- Legal -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a href="#"
+            class="text-[9px] uppercase tracking-[0.12em] text-white/90 hover:text-theme1/90 transition-colors">
+            Privacy
+          </a>
+          <a href="#"
+            class="text-[9px] uppercase tracking-[0.12em] text-white/90 hover:text-theme1/90 transition-colors">
+            Terms
+          </a>
+          <a href="#"
+            class="text-[9px] uppercase tracking-[0.12em] text-white/90 hover:text-theme1/90 transition-colors">
+            Disclaimer
+          </a>
+        </div>
+        <!-- Back to Top -->
+        <a href="#"
+          class="group flex items-center gap-2 text-[9px] uppercase tracking-[0.15em] text-white/40 hover:text-white transition-colors">
+          Back to Top
+          <span class="group-hover:-translate-y-1 transition-transform duration-300">
+            ↑
+          </span>
+        </a>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- ========= FLOATING WHATSAPP BUTTON (BOTTOM LEFT) ============ -->
+  <a href="https://wa.me/919417400003?text=Hello,%20I%20have%20a%20query%20regarding%20Barog%20Valley." target="_blank"
+    rel="noopener noreferrer"
+    class="fixed bottom-6 left-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300 group"
+    aria-label="Chat on WhatsApp">
+    <!-- WhatsApp Icon (SVG) -->
+    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+    </svg>
+
+    <!-- Hover Text / Tooltip (Optional) -->
+    <span
+      class="absolute left-16 bg-black/80 text-white text-xs px-3 py-1.5 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-md">
+      Chat with us
+    </span>
+  </a>
+
+</body>
+
+</html>

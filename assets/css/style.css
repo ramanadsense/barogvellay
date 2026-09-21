@@ -1,0 +1,91 @@
+:root {
+  --theme1-color: #ffe32f;
+  --theme2-color: #6f3ae0;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(18, 14, 10, 0.48),
+    rgba(18, 14, 10, 0.22)
+  );
+}
+
+.drawer-shadow {
+  box-shadow: -28px 0 60px rgba(0, 0, 0, 0.22);
+}
+
+.thin-line {
+  height: 1px;
+  background: rgba(201, 135, 100, 0.65);
+}
+
+.vertical-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+#residence .img2 {
+  z-index: 1;
+}
+
+#residence .img2::before {
+  content: "";
+  height: 105%;
+  width: 100%;
+  background: var(--theme1-color);
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  z-index: -1;
+}
+
+/* Choose Card start */
+.choose-card {
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.choose-card:hover {
+  border-color: #c5cce0;
+  box-shadow: 0 6px 24px rgba(13, 27, 62, 0.08);
+}
+
+.choose-bar {
+  width: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--theme1-color),
+    var(--theme2-color)
+  );
+  transform: scaleY(0);
+  transition: transform 0.32s ease;
+  transform-origin: top;
+}
+
+.choose-card:hover .choose-bar {
+  transform: scaleY(1);
+}
+/* Choose Card end */
