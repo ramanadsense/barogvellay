@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener('scroll', function () {
+    const headerContainer = document.getElementById('headerContainer');
+    if (headerContainer) {
+      if (window.scrollY > 40) {
+        headerContainer.classList.remove('h-18', 'md:h-24', 'px-6', 'md:px-10');
+        headerContainer.classList.add('h-14', 'md:h-20', 'px-5', 'md:px-8', 'shadow-lg');
+      } else {
+        headerContainer.classList.add('h-18', 'md:h-24', 'px-6', 'md:px-10');
+        headerContainer.classList.remove('h-14', 'md:h-20', 'px-5', 'md:px-8', 'shadow-lg');
+      }
+    }
+  });
+
   // 1. Drawer Logic
   const drawerOverlay = document.getElementById('drawerOverlay');
   const drawer = document.getElementById('drawer');
